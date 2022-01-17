@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+       <div class="row">
+        <div class="col-md-12">
+           <h1>{{ post.title }}</h1>
+
+           <span>{{ post.author }} | {{ post.time }}</span>
+
+           <p class="p">{{ post.text }}</p>
+        </div>
+       </div>
+    </div>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        .p {font-weight: 500;font-size: 20px;margin-bottom: 300px;}
+        footer {position: fixed; bottom: 0;right: 0;left: 0;}
+    </style>
+{% endblock content %}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>Edenor-News</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="manifest" href="/static/site.webmanifest">
+      <link rel="icon" href="/static/img/logo.jpg">
+      <link rel="apple-touch-icon" href="/static/img/logo.jpg">
+	  
+      <!-- Place favicon.ico in the root directory -->
+      <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,300i,400,500,600" rel="stylesheet">
+      <link rel="stylesheet" href="/static/icons/icomoon.css">
+      <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/static/icons/fontawesome-all.min.css">
+      <link rel="stylesheet" href="/static/css/plugins.css">
+      <link rel="stylesheet" href="/static/css/main.css">
+      <link rel="stylesheet" href="/static/css/style.css">
+      <link rel="stylesheet" href="/static/dist/css/swiper.min.css">
+   </head>
+   <body>
+    <!-- Main Nav START -->
+    <nav id="main-nav" class="main-nav fixed">
+       <div class="container">
+          <div class="row">
+             <div class="col-12">
+                <div class="nav-header d-flex justify-content-between align-items-center">
+                   <a href="/" class="logo" title="LOGO">
+                   <img class="logo-img" src="/static/img/logo.jpg" alt="LOGO">
+                   <img class="alt-logo-img" src="/static/img/logo-alt.png" alt="LOGO">
+                   </a>
+                </div>
+                <div class="nav-wrap">
+                   <ul id="nav" class="nav-wrap__list menu">
+                      <li class="current"><a href="/" title="Главная">Главная</a></li>
+                      <li><a href="#" title="Проекте">О Проекте</a></li>
+                      <li><a href="#" title="Донат"><span class="red-fox">Донат</span></a></li>
+                      <li><a href="#" title="Контакты">Контакты</a></li>
+                   </ul>
+                </div>
+             </div>
+          </div>
+       </div>
+    </nav>
+    <!-- Main Nav END -->
+    <!-- Page Content START -->
+    <div class="page-content">
+        {% block content %}
+            This is content
+        {% endblock %}
+        <!-- Footer START -->
+        <footer class="section site-footer bg-dark">
+           <div class="container">
+              <div class="row">
+                 <div class="col-lg-2 col-md-2">
+                    <img class="logo-img my-3" src="/static/img/logo.jpg" alt="LOGO">
+                 </div>
+                 <div class="col-lg-6 col-md-6 text-center">
+                    <p class="footer-text">© Edenor-News 2022 - Все права только у Pain_4986.</p>
+                 </div>
+                 <div class="col-md-4">
+                    <ul class="ft-nav social-nav my-3">
+                       <li class="mx-1"><a href="javascript:void(0);" title="vk"><i class="fa fa-vk"></i></a></li>
+                       <li class="mx-1"><a href="javascript:void(0);" title="twitter"><i class="fa fa-twitter"></i></a></li>
+                       <li class="mx-1"><a href="javascript:void(0);" title="facebook"><i class="fa fa-facebook"></i></a></li>
+                       <li class="mx-1"><a href="javascript:void(0);" title="instagram"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                    <a href="#">
+                       <span class="corp-design" onclick="alert('Имперцы лошки!')"></span>
+                    </a>
+                 </div>
+           </div>
+        </footer>
+        <!-- Footer END -->
+     </div>
+      <!-- Page Content END -->	
+      <script src="/static/dist/js/swiper.min.js"></script>
+      <!-- Initialize Swiper -->
+      <script>
+         var swiper = new Swiper('.swiper-container', {
+           spaceBetween: 30,
+           hashNavigation: {
+             watchState: true,
+           },
+           pagination: {
+             el: '.swiper-pagination',
+             clickable: true,
+           },
+           navigation: {
+             nextEl: '.swiper-button-next',
+             prevEl: '.swiper-button-prev',
+           },
+         });
+      </script>
+      <script src="/static/js/jquery.min.js"></script>
+      <script src="/static/js/examples.js"></script>
+      <script src="/static/js/vendor/modernizr-3.5.0.min.js"></script>
+      <script src="/static/js/vendor/jquery-3.2.1.min.js"></script>
+      <script src="/static/js/plugins.js"></script>
+      <script src="/static/js/main.js"></script>
+   </body>
+</html>

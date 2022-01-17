@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+         <!-- Home Section START -->
+         <section id="home-sec" class="main-banner parallax">
+            <div class="bg-lefts"></div>
+            <div class="container">
+               <div class="row">
+                     <!-- Swiper -->
+                     <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                           <div class="swiper-slide" data-hash="slide1">
+                              <div class="col-md-6">
+                                 <h3 class="name-intro">News</h3>
+                                 <span class="hr-intro"></span>
+                                 <p class="docopation-intro">
+                                    Мы открыли свой сайт <br>
+                                    с независимыми новостями
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                        <!-- Add Arrows -->
+                     </div>
+               </div>
+            </div>
+         </section>
+         <!-- Home Section END -->
+         <div class="container">
+            <div class="row">
+               {% for post in posts %}
+                  <div class="news-link">
+                     <img class="poster" src="/static/img/post.png">
+                     <h3 class="news-log">{{ post.title }}</h3>
+                     <p class="description">
+                        {{ post.description }}
+                     </p>
+                     <a href="/post/{{ post.id }}" class="btn-view">Читать</a>
+                     <span class="time-data">{{ post.time }}</span>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
+{% endblock content %}
