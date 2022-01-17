@@ -27,6 +27,7 @@ from datetime import datetime
 import configparser
 import psutil
 import uvicorn
+import os
 # ************** Standart module end *****************
 
 # ************** External module *********************
@@ -120,7 +121,7 @@ if __name__ == "__main__":
     # ******* dev *******
     uvicorn.run('app:app',
         host="0.0.0.0", 
-        port=8000,
+        port=int(os.environ.get("PORT", 5000)),
         log_level="debug",
         http="h11",
         reload=True, 
