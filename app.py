@@ -136,7 +136,7 @@ if __name__ == "__main__":
     # ******* dev *******
     uvicorn.run('app:app',
         host="0.0.0.0", 
-        port=os.environ.get("PORT", 8000),
+        port=int(os.environ.get("PORT", 8000)),
         log_level="debug",
         http="h11",
         reload=True, 
