@@ -10,12 +10,43 @@
                      <div class="swiper-container">
                         <div class="swiper-wrapper">
                            <div class="swiper-slide" data-hash="slide1">
+                              <div class="pc col-md-6">
+                                 <img src="https://www.investor-one.com/assets/icon/icon-performance-top-5-06cef4462ddc312f3f439e034ff7b5919379bbf01da1c59b58f09b3175a37540.svg" style="width: 50%;">
+                              </div>
                               <div class="col-md-6">
-                                 <h3 class="name-intro">News</h3>
+                                 <h3 class="name-intro">TOP News</h3>
                                  <span class="hr-intro"></span>
                                  <p class="docopation-intro">
                                     Мы открыли свой сайт <br>
                                     с независимыми новостями
+                                 </p>
+                              </div>
+                           </div>
+                           
+                           <div class="swiper-slide" data-hash="slide2">
+                              <div class="pc col-md-6">
+                                 <img src="http://cdn.onlinewebfonts.com/svg/img_308140.png" style="width: 50%;">
+                              </div>
+                              <div class="col-md-6">
+                                 <h3 class="name-intro">HOT News</h3>
+                                 <span class="hr-intro"></span>
+                                 <p class="docopation-intro">
+                                    Прошёл УХК на отдельном <br>
+                                    сервере, Херостив косячник
+                                 </p>
+                              </div>
+                           </div>
+                           
+                           <div class="swiper-slide" data-hash="slide3">
+                              <div class="pc col-md-6">
+                                 <img src="http://cdn.onlinewebfonts.com/svg/img_461995.png" style="width: 50%;">
+                              </div>
+                              <div class="col-md-6">
+                                 <h3 class="name-intro">LAST news</h3>
+                                 <span class="hr-intro"></span>
+                                 <p class="docopation-intro">
+                                    Открылась общественная <br>
+                                    ферма шалкеров в энде
                                  </p>
                               </div>
                            </div>
@@ -24,6 +55,7 @@
                         <div class="swiper-pagination"></div>
                         <!-- Add Arrows -->
                      </div>
+                  </div>
                </div>
             </div>
          </section>
@@ -32,7 +64,11 @@
             <div class="row">
                {% for post in posts %}
                   <div class="news-link">
-                     <img class="poster" src="/static/img/post.png">
+                     {% if post.image == 'auto' %}
+                        <img class="poster" src="/static/img/post.png">
+                     {% else %}
+                        <img class="poster" src="{{ post.image }}">
+                     {% endif %}
                      <h3 class="news-log">{{ post.title }}</h3>
                      <p class="description">
                         {{ post.description }}

@@ -3,20 +3,34 @@
 {% block content %}
     <div class="container">
        <div class="row">
-        <div class="col-md-12">
-           <h1>{{ post.title }}</h1>
-
-           <span>{{ post.author }} | {{ post.time }}</span>
-
-           <p class="p">{{ post.text }}</p>
-        </div>
+            <h1 style="height: 30px; width: 100%;">{{ post.title }}</h1>
+            <span style="vertical-align: middle; margin-left: 20px; width: 100%;">{{ post.author }} | {{ post.time }}</span>
+            <div style="min-width: 650px;width: 100%;text-align: center;">
+                {% if post.image == 'auto' %}
+                <img style="width: auto;max-height: 500px;display: block;text-align: center;margin: 0 auto;" src="/static/img/post.png">
+                {% else %}
+                <img style="width: auto;max-height: 200px;display: block;text-align: center;margin: 0 auto;" src="{{ post.image }}">
+                {% endif %}
+            </div>
+            <div class="col-md-12" id="post">
+                {{ post.text }}
+            </div>
+            <script>
+                let text = '{{ post.text }}'
+                text = text.replace(/&lt;/gi, '<')
+                text = text.replace(/&gt;/gi, '>')
+                post.innerHTML = text
+            </script>
        </div>
     </div>
     <style>
         h1 {
             text-align: center;
         }
-        .p {font-weight: 500;font-size: 20px;margin-bottom: 300px;}
-        footer {position: fixed; bottom: 0;right: 0;left: 0;}
+        p {font-weight: 500;font-size: 20px;}
+        footer {display: none;}
+        .row {
+            padding: 20px;
+        }
     </style>
 {% endblock content %}

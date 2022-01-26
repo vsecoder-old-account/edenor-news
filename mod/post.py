@@ -4,6 +4,7 @@ from mod.api import Post
 # ******** End DataBase module ***************
 
 # ************** Standart module *********************
+from datetime import datetime
 import random
 from mod.utils import email
 # ************** Standart module end *****************
@@ -15,7 +16,7 @@ class Posts():
         post = Post(
             title=data.title,
             author=data.author,
-            time=data.time,
+            time=datetime.now(),
             image=data.image,
             description=data.description,
             text=data.text

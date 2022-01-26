@@ -1,3 +1,5 @@
+html {overflow-x: hidden;}
+
 span.red-fox {
     color: #fe666f;
 }

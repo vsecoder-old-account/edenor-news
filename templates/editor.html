@@ -1,3 +1,250 @@
-<!--
-    Edenor-News post editor
--->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editor</title>
+  <link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <style>
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    }
+    input, textarea {
+      border: none;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    textarea {
+      max-width: 650px;
+      width: 650px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+    <div class="ce-example__content _ce-example__content--small">
+      <div style="width: 100%;text-align: center;">
+        <div style="max-width: 650px;margin: 0 auto;text-align: left;">
+          <input type="text" placeholder="Заголовок..." id="title"><br>
+          <input type="text" placeholder="Автор..." id="author"><br>
+          <input type="text" placeholder="Ссылка на изображение..." id="img"><br>
+          <textarea placeholder="Описание" width="300px" height="400px" id="description"></textarea>
+        </div>
+      </div>
+      <div id="editorjs"></div>
+
+    </div>
+    <div class="ce-example__output">
+      <pre class="ce-example__output-content" id="output"></pre>
+      <button onclick="public()" style="font-family: CustomSansSerif,'Lucida Grande',Arial,sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 17px;
+      color: #000;
+      text-decoration: none;
+      border: 2px solid #333;
+      border-radius: 16px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      margin: 0 0 15px;
+      background-color: #fff;
+      cursor: pointer;
+      margin-left: 30%;">Public</button>
+    </div>
+  </div>
+
+  <!-- Load Tools -->
+  <!--
+   You can upload Tools to your project's directory and connect them by relative links.
+   Also you can load each Tool from CDN or use NPM/Yarn packages.
+   Read more at Tools Connection doc:
+   https://editorjs.io/getting-started#tools-connection
+   -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script><!-- List -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script><!-- Checklist -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
+
+  <!-- Load Editor.js's Core -->
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+  <script src ="https://cdn.jsdelivr.net/npm/editorjs-html@3.4.2/build/edjsHTML.browser.js"></script>
+
+  <!-- Initialization -->
+  <script>
+    /**
+     * To initialize the Editor, create a new instance with configuration object
+     * @see docs/installation.md for mode details
+     */
+    const edjsParser = edjsHTML();
+    var editor = new EditorJS({
+      /**
+       * Enable/Disable the read only mode
+       */
+      readOnly: false,
+
+      /**
+       * Wrapper of Editor
+       */
+      holder: 'editorjs',
+
+      /**
+       * Common Inline Toolbar settings
+       * - if true (or not specified), the order from 'tool' property will be used
+       * - if an array of tool names, this order will be used
+       */
+      // inlineToolbar: ['link', 'marker', 'bold', 'italic'],
+      // inlineToolbar: true,
+
+      /**
+       * Tools list
+       */
+      tools: {
+        /**
+         * Each Tool is a Plugin. Pass them via 'class' option with necessary settings {@link docs/tools.md}
+         */
+        header: {
+          class: Header,
+          inlineToolbar: ['marker', 'link'],
+          config: {
+            placeholder: 'Header'
+          },
+          shortcut: 'CMD+SHIFT+H'
+        },
+
+        /**
+         * Or pass class directly without any configuration
+         */
+        image: SimpleImage,
+
+        list: {
+          class: List,
+          inlineToolbar: true,
+          shortcut: 'CMD+SHIFT+L'
+        },
+
+        quote: {
+          class: Quote,
+          inlineToolbar: true,
+          config: {
+            quotePlaceholder: 'Enter a quote',
+            captionPlaceholder: 'Quote\'s author',
+          },
+          shortcut: 'CMD+SHIFT+O'
+        },
+
+        marker: {
+          class:  Marker,
+          shortcut: 'CMD+SHIFT+M'
+        },
+
+        code: {
+          class:  CodeTool,
+          shortcut: 'CMD+SHIFT+C'
+        },
+
+        inlineCode: {
+          class: InlineCode,
+          shortcut: 'CMD+SHIFT+C'
+        },
+
+        linkTool: LinkTool,
+
+        embed: Embed
+
+      },
+
+      /**
+       * This Tool will be used as default
+       */
+      // defaultBlock: 'paragraph',
+
+      /**
+       * Initial Editor data
+       */
+      data: {
+        blocks: [
+          {
+            type : 'paragraph',
+            data : {
+              text : 'Текст поста...'
+            }
+          }
+        ]
+      },
+      onChange: function(api, event) {
+        console.log('something changed', event);
+      }
+    });
+    function public() {
+        title = title.value
+        author = author.value
+        img = img.value
+        description = description.value
+        editor.save().then((output) => {
+            html = edjsParser.parse(output).join('');
+            console.log(JSON.stringify(html));
+            js = {
+                  title: title,
+                  author: author,
+                  image: img,
+                  description: description,
+                  text: html
+                }
+            console.log(js)
+            let response = fetch('/public', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(js)
+            });
+        }).catch((error) => {
+            alert('Saving failed: ', error)
+        });
+    }
+
+    /**
+     * Saving button
+    const saveButton = document.getElementById('saveButton');
+
+     */
+    /**
+     * Toggle read-only button
+    const toggleReadOnlyButton = document.getElementById('toggleReadOnlyButton');
+    const readOnlyIndicator = document.getElementById('readonly-state');
+
+     */
+    /**
+     * Saving example
+    saveButton.addEventListener('click', function () {
+      editor.save()
+        .then((savedData) => {
+          cPreview.show(savedData, document.getElementById("output"));
+        })
+        .catch((error) => {
+          console.error('Saving error', error);
+        });
+    });
+     */
+
+    /**
+     * Toggle read-only example
+    toggleReadOnlyButton.addEventListener('click', async () => {
+      const readOnlyState = await editor.readOnly.toggle();
+
+      readOnlyIndicator.textContent = readOnlyState ? 'On' : 'Off';
+    });
+     */
+  </script>
+</body>
+</html>

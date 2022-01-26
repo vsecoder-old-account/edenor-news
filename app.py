@@ -23,16 +23,17 @@
 """
 
 # ************** Standart module *********************
+import os
 from datetime import datetime
 import configparser
 import psutil
 import uvicorn
-import os
 # ************** Standart module end *****************
 
 # ************** External module *********************
 from fastapi import FastAPI
 from fastapi import Request
+from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
 #from fastapi import WebSocket
 from starlette.templating import Jinja2Templates
@@ -67,6 +68,14 @@ from mod.post import Posts
 # loguru logger on
 add_logging(logging.getint("level"))
 
+# public response model
+class Data(BaseModel):
+    title: str
+    author: str
+    image: str
+    description: str
+    text: str
+
 # Server instance creation
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -99,7 +108,7 @@ def status_page(request: Request):
 # ************** Start post page handlers **************
 # /post/<id>
 @app.get('/post/{id}')
-def methods_page(request: Request, id):
+def methods_post_page(request: Request, id):
     post = Posts._get_post(id)
     return templates.TemplateResponse('post.html',
                                       {'request': request,
@@ -107,13 +116,19 @@ def methods_page(request: Request, id):
 
 # /editor/
 @app.get('/editor')
-def methods_page(request: Request, password):
+def methods_editor_page(request: Request, password):
     print(admin["password"])
     if password != "admin":
         return "Unvalid password"
     else:
         return templates.TemplateResponse('editor.html',
                                         {'request': request})
+
+# /public/
+@app.post('/public')
+def methods_public_page(data: Data):
+    Posts._create_post(data)
+    print(data)
 # *********************** END *************************
 
 # ******************* start server ********************
@@ -121,7 +136,7 @@ if __name__ == "__main__":
     # ******* dev *******
     uvicorn.run('app:app',
         host="0.0.0.0", 
-        port=int(os.environ.get("PORT", 5000)),
+        port=os.environ.get("PORT", 8000),
         log_level="debug",
         http="h11",
         reload=True, 
